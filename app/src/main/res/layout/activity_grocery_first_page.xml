@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_grocery_first_page">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@id/layoutDotss"
+        android:alpha="2"
+        android:background="@android:color/white" />
+
+
+    <LinearLayout
+        android:id="@+id/layoutDotss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_skip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight=".5"
+            android:background="@null"
+            android:text="Skip"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:backgroundTint="#00BB86FC" />
+
+        <RelativeLayout
+            android:id="@+id/wala"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight=".5"
+            android:background="@null"
+            app:backgroundTint="#00BB86FC" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight=".5"
+            android:background="@drawable/btn_bg"
+            android:padding="5dp"
+            android:text="Next  ➤"
+            app:backgroundTint="#72FFFFFF"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#3E3333" />
+    </LinearLayout>
+</RelativeLayout>

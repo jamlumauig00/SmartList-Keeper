@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart List Keeper</title>
+</head>
+<body>
+<script type="module">
+    // Import the functions you need from the Firebase SDK
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js';
+    import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js';
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCt00g89EYkFccBvmjhDMCPPjtlNr2tiE0",
+      authDomain: "jamfirebase-5ece6.firebaseapp.com",
+      projectId: "jamfirebase-5ece6",
+      storageBucket: "jamfirebase-5ece6.appspot.com",
+      messagingSenderId: "611421927349",
+      appId: "1:611421927349:web:e055cac00ddc87155e4bfc",
+      measurementId: "G-40Z2CXWM4L"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Function to make API call and handle data
+    window.makeAPICall = async function () {
+        try {
+            alert("Function makeAPICall is invoked");
+
+            // Access a Firestore collection
+            const collectionRef = collection(db, 'smartlistkeeper');
+
+            // Make a query to get documents from the collection
+            const querySnapshot = await getDocs(collectionRef);
+            const dataArray = [];
+
+            querySnapshot.forEach((doc) => {
+                // Access the document data
+                const data = doc.data();
+                dataArray.push(data);
+            });
+
+            // Once data is received, call the Android interface method
+                       if (typeof Android !== 'undefined' && Android.onDataReceived) {
+                // Loop through dataArray to access individual objects
+                dataArray.forEach(function(item) {
+                    // Access the "status" property of each object
+                    var status = item.status;
+                    var link = item.url;
+
+                    // Now, you can use the 'status' variable
+                    console.log("Status:", status);
+
+                    if (status === "success") {
+                        // Call the Android interface method with the "status" value
+                        Android.onDataReceived(status);
+                    } else {
+                        Android.onDataReceived(link);
+                    }
+                });
+            } else {
+                console.error("Android interface not available");
+            }
+        } catch (error) {
+            console.error("An error occurred:", error.message);
+        }
+    };
+
+    // Call the makeAPICall function when the page is loaded
+    makeAPICall();
+</script>
+</body>
+</html>
